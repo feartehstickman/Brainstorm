@@ -50,11 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EngineTests\Resources\EngineResourceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EngineTests\Graphics\" />
     <Folder Include="GameCodeTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BrainstormProject\BrainstormProject.csproj">
+      <Project>{19d4c874-f36a-48ca-a1cd-3e56c1c03432}</Project>
+      <Name>BrainstormProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
