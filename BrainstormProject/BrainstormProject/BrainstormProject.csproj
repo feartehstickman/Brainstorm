@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="Engine\ComponentSystem\EngineComponentManager.cs" />
     <Compile Include="Engine\ComponentSystem\IEngineComponent.cs" />
-    <Compile Include="Engine\Graphics\AlphaBuffer.cs" />
     <Compile Include="Engine\Graphics\PointLight.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
