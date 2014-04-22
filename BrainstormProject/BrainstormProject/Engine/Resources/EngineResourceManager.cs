@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Threading;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -14,8 +15,9 @@ namespace BrainstormProject.Engine.Resources
     {
         private GraphicsDevice Device;
         private Game HostGame;
-
         private List<EngineResource> Resources;
+
+        private Timer ResourceListCleanTask;
 
         public int ResourceCount
         {
@@ -42,7 +44,22 @@ namespace BrainstormProject.Engine.Resources
 
         void Device_ResourceCreated(object sender, ResourceCreatedEventArgs e)
         {
-            EngineResource CreatedResource = new EngineResource(e.Resource);
+            EngineResource CreatedResource = new EngineResource(e.Resource, this);
+
+            Resources.Add(CreatedResource);
+        }
+
+
+        private void CleanResourceList()
+        {
+            for (int i = 0; i < Resources.Count; ++i)
+            {
+                if (Resources[i].ResourceCollected())
+                {
+                    Resources.RemoveAt(i);
+                    i--;
+                }
+            }
         }
     }
 }
