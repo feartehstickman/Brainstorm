@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainstormProject", "Brains
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainstormProjectTests", "BrainstormProjectTests\BrainstormProjectTests.csproj", "{3E2C24DE-B2FD-4976-B36E-A0F955E06FA4}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BrainstormContent", "BrainstormContent\BrainstormContent.contentproj", "{33388183-962F-49FF-A46C-760F71BF819B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainstormContent", "BrainstormContent\BrainstormContent.contentproj", "{33388183-962F-49FF-A46C-760F71BF819B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
