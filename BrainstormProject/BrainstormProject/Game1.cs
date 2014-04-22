@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using BrainstormProject.Engine.Graphics;
 #endregion
 
 namespace BrainstormProject
@@ -15,6 +16,7 @@ namespace BrainstormProject
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
 
         public Game1()
             : base()
@@ -44,6 +46,7 @@ namespace BrainstormProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
         }
 
         /// <summary>

@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EngineTests\" />
+    <Folder Include="EngineTests\Graphics\" />
     <Folder Include="GameCodeTests\" />
   </ItemGroup>
   <Choose>
