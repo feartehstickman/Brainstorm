@@ -5,6 +5,9 @@ using System.Text;
 using System.IO;
 using System.Net;
 
+using Microsoft.Xna.Framework;
+using MonoGame.Framework;
+
 namespace BrainstormProject.Engine.ComponentSystem
 {
     public class EngineComponentManager : IEngineComponent, ILoadable, IUpdatable, IRenderable
@@ -16,7 +19,30 @@ namespace BrainstormProject.Engine.ComponentSystem
             {
                 return Components.Count;
             }
-            internal set;
+            set
+            {
+            }
+        }
+        public int RenderableComponentCount
+        {
+            get
+            {
+                return RenderableComponents.Count;
+            }
+        }
+        public int LoadableComponentCount
+        {
+            get
+            {
+                return LoadableComponents.Count;
+            }
+        }
+        public int UpdatableComponentCount
+        {
+            get
+            {
+                return UpdatableComponents.Count;
+            }
         }
         public int TotalActiveComponents
         {
@@ -25,22 +51,55 @@ namespace BrainstormProject.Engine.ComponentSystem
                 int ActiveComponents = 0;
                 for (int i = 0; i < Components.Count; ++i)
                 {
-                    
+                    if (Components[i].IsActive())
+                    {
+                        ActiveComponents++;
+                    }
                 }
+                return ActiveComponents;
             }
-            internal set;
+            private set
+            {
+                TotalActiveComponents = value;
+            }
         }
         public List<IRenderable> RenderableComponents { get; internal set; }
         public List<IUpdatable> UpdatableComponents { get; internal set; }
         public List<IEngineComponent> Components { get; internal set; }
         public List<ILoadable> LoadableComponents { get; internal set; }
+        public string Name { get; internal set; }
 
+        private bool Active;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public EngineComponentManager()
         {
-
+            RenderableComponents = new List<IRenderable>();
+            UpdatableComponents = new List<IUpdatable>();
+            LoadableComponents = new List<ILoadable>();
+            Components = new List<IEngineComponent>();
         }
 
-        public void AddComponent (IEngineComponent Component)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Name">Name of this component manager</param>
+        public EngineComponentManager(string Name)
+        {
+            if (Name != string.Empty)
+            {
+                this.Name = Name;
+            }
+
+            RenderableComponents = new List<IRenderable>();
+            UpdatableComponents = new List<IUpdatable>();
+            LoadableComponents = new List<ILoadable>();
+            Components = new List<IEngineComponent>();
+        }
+
+        public void AddComponent(IEngineComponent Component)
         {
             Components.Add(Component);
 
@@ -56,6 +115,72 @@ namespace BrainstormProject.Engine.ComponentSystem
             {
                 RenderableComponents.Add(Component as IRenderable);
             }
+        }
+
+        public void Load()
+        {
+            for (int i = 0; i < LoadableComponents.Count; ++i)
+            {
+                ILoadable CurrentLoadable = LoadableComponents[i] as ILoadable;
+
+                CurrentLoadable.Load();
+            }
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            for (int i = 0; i < UpdatableComponents.Count; ++i)
+            {
+                IUpdatable CurrentUpdatable = UpdatableComponents[i] as IUpdatable;
+
+                CurrentUpdatable.Update(gameTime);
+            }
+        }
+
+        public void Render(GameTime gameTime)
+        {
+            for (int i = 0; i < RenderableComponents.Count; ++i)
+            {
+                IRenderable CurrentRenderable = RenderableComponents[i] as IRenderable;
+
+                CurrentRenderable.Render(gameTime);
+            }
+        }
+
+        public string GetName()
+        {
+            if (this.Name == string.Empty)
+            {
+                return "Unnamed Engine Component Manager";
+            }
+            return this.Name;
+        }
+
+        public bool IsDead()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsComponentManager()
+        {
+            return true;
+        }
+
+        public bool IsActive()
+        {
+            return this.Active;
+        }
+
+        public void Activate()
+        {
+            if (!Active)
+                Active = true;
+        }
+
+        public void Deactivate()
+        {
+            if (Active)
+                Active = false;
         }
     }
 }
