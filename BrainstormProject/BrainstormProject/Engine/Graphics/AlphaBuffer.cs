@@ -13,6 +13,7 @@ namespace BrainstormProject.Engine.Graphics
     {
         public RenderTarget2D AlphaBufferTarget { get; internal set; }
         private GraphicsDevice Device;
+        private BlendState AlphaState;
 
         public AlphaBuffer(GraphicsDevice Device)
         {
@@ -29,6 +30,7 @@ namespace BrainstormProject.Engine.Graphics
                     false,
                     SurfaceFormat.Alpha8,
                     DepthFormat.None);
+
 
                 if (AlphaBufferTarget != null)
                 {
