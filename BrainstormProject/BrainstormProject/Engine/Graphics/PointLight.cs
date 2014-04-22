@@ -46,5 +46,19 @@ namespace BrainstormProject.Engine.Graphics
             this.Intensity = Intensity;
             this.Active    = Active;
         }
+
+        public void Activate()
+        {
+            Active = true;
+        }
+        public void Deactivate()
+        {
+            Active = false;
+        }
+
+        public void SetPosition(Vector2 Position)
+        {
+            this.Position = Position;
+        }
     }
 }
