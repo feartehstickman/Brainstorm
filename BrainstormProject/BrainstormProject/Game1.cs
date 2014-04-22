@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using BrainstormProject.Engine.Graphics;
+using BrainstormProject.Engine.Resources;
 #endregion
 
 namespace BrainstormProject
@@ -17,6 +18,9 @@ namespace BrainstormProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        EngineResourceManager rmanager;
+
+        Texture2D x;
 
         public Game1()
             : base()
@@ -33,7 +37,7 @@ namespace BrainstormProject
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+
 
             base.Initialize();
         }
@@ -47,6 +51,8 @@ namespace BrainstormProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            rmanager = new EngineResourceManager(this);
 
         }
 

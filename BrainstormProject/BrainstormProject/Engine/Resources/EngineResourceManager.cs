@@ -32,14 +32,17 @@ namespace BrainstormProject.Engine.Resources
             this.HostGame = HostGame;
             Device = HostGame.GraphicsDevice;
 
+            Resources = new List<EngineResource>();
+
             Device.ResourceCreated   += Device_ResourceCreated;
             Device.ResourceDestroyed += Device_ResourceDestroyed;
+
+            ResourceListCleanTask = new Timer(new TimerCallback(this.CleanResourceList), null, 0, 100);
         }
 
         void Device_ResourceDestroyed(object sender, ResourceDestroyedEventArgs e)
         {
-            
-            throw new NotImplementedException();
+            System.Windows.Forms.MessageBox.Show("RESOURCE DESTROYED: " + e.Name) ;
         }
 
         void Device_ResourceCreated(object sender, ResourceCreatedEventArgs e)
@@ -47,10 +50,12 @@ namespace BrainstormProject.Engine.Resources
             EngineResource CreatedResource = new EngineResource(e.Resource, this);
 
             Resources.Add(CreatedResource);
+
+            System.Windows.Forms.MessageBox.Show("RESOURCE CREATED: " + e.Resource.GetType().ToString());
         }
 
 
-        private void CleanResourceList()
+        private void CleanResourceList(object arg)
         {
             for (int i = 0; i < Resources.Count; ++i)
             {
