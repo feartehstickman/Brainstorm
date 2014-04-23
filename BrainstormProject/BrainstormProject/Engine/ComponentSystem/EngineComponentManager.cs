@@ -173,7 +173,21 @@ namespace BrainstormProject.Engine.ComponentSystem
         {
             for (int i = 0; i < Components.Count; ++i)
             {
-                if ( Components[i].)
+                if (Components[i].IsDead())
+                {
+                    if (Components[i] is ILoadable)
+                    {
+                        LoadableComponents.RemoveAt(i);
+                    }
+                    if (Components[i] is IUpdatable)
+                    {
+                        UpdatableComponents.RemoveAt(i);
+                    }
+                    if (Components[i] is IRenderable)
+                    {
+                        RenderableComponents.RemoveAt(i);
+                    }
+                }
             }
         }
 
@@ -185,28 +199,23 @@ namespace BrainstormProject.Engine.ComponentSystem
             }
             return this.Name;
         }
-
         public bool IsDead()
         {
             throw new NotImplementedException();
         }
-
         public bool IsComponentManager()
         {
             return true;
         }
-
         public bool IsActive()
         {
             return this.Active;
         }
-
         public void Activate()
         {
             if (!Active)
                 Active = true;
         }
-
         public void Deactivate()
         {
             if (Active)

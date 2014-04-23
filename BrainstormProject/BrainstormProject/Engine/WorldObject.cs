@@ -15,16 +15,11 @@ using BrainstormProject.Engine.Graphics;
 
 namespace BrainstormProject.Engine.Graphics
 {
-    [Serializable]
     public class WorldObject : ILoadable, IUpdatable, IRenderable, IEngineComponent
     {
-        [XmlElement]
         private bool Active;
 
-        [XmlElement]
         private bool Dead;
-
-        [XmlElement]
         public string Name { get; internal set; }
 
         public WorldObject()

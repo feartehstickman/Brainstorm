@@ -29,6 +29,11 @@ namespace BrainstormProject.Engine.Graphics
         /// </summary>
         public PointLight()
         {
+            Position = new Vector2();
+            Color = new Vector4();
+            Intensity = 0;
+            Active = false;
+            Name = "Un-Initiated-Point-Light"
         }
 
         /// <summary>
@@ -45,7 +50,6 @@ namespace BrainstormProject.Engine.Graphics
             this.Intensity = Intensity;
             this.Active    = Active;
         }
-
         public void Activate()
         {
             Active = true;
@@ -54,27 +58,22 @@ namespace BrainstormProject.Engine.Graphics
         {
             Active = false;
         }
-
         public void SetPosition(Vector2 Position)
         {
             this.Position = Position;
         }
-
         public bool IsComponentManager()
         {
             return false;
         }
-
         public bool IsActive()
         {
             return this.IsActive();
         }
-
         public bool IsDead()
         {
             throw new NotImplementedException();
         }
-
         public string GetName()
         {
             return "PointLight";
