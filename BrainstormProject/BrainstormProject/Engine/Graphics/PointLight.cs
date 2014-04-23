@@ -27,6 +27,9 @@ namespace BrainstormProject.Engine.Graphics
         [XmlElement]
         public bool Active;
 
+        [XmlElement]
+        public string Name;
+
         /// <summary>
         /// Generic constructor
         /// </summary>
@@ -76,6 +79,11 @@ namespace BrainstormProject.Engine.Graphics
         public bool IsDead()
         {
             throw new NotImplementedException();
+        }
+
+        public string GetName()
+        {
+
         }
     }
 }

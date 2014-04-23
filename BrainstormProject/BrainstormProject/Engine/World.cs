@@ -14,19 +14,33 @@ namespace BrainstormProject.Engine
     {
         private EngineComponentManager WorldObjects;
 
+        public string Name { get; internal set; }
+
+        public World()
+        {
+            Name = "GameWorld";
+        }
+        public World(string WorldName)
+        {
+            Name = WorldName;
+        }
+
         public bool IsComponentManager()
         {
             return false;
         }
-
         public bool IsActive()
         {
             throw new NotImplementedException();
         }
-
         public bool IsDead()
         {
             throw new NotImplementedException();
+        }
+
+        public string GetName()
+        {
+            return Name;
         }
     }
 }

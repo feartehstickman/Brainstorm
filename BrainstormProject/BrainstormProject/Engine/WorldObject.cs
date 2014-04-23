@@ -63,5 +63,10 @@ namespace BrainstormProject.Engine.Graphics
         {
             Active = false;
         }
+
+        public void GetName()
+        {
+            return Name;
+        }
     }
 }

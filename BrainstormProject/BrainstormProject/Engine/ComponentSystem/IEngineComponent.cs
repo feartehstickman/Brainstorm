@@ -33,6 +33,7 @@ namespace BrainstormProject.Engine.ComponentSystem
         bool IsComponentManager();
         bool IsActive();
         bool IsDead();
+        string GetName();
     }
 
     /// <summary>
