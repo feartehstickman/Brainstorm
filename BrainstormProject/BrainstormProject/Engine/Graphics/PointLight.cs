@@ -12,22 +12,16 @@ using BrainstormProject.Engine.ComponentSystem;
 
 namespace BrainstormProject.Engine.Graphics
 {
-    [Serializable]
     public class PointLight : IEngineComponent
     {
-        [XmlElement]
         public Vector2 Position;
 
-        [XmlElement]
         public Vector4 Color;
 
-        [XmlElement]
         public float   Intensity;
 
-        [XmlElement]
         public bool Active;
 
-        [XmlElement]
         public string Name;
 
         /// <summary>

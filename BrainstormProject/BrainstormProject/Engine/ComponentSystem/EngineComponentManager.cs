@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 using Microsoft.Xna.Framework;
 using MonoGame.Framework;
@@ -70,6 +71,8 @@ namespace BrainstormProject.Engine.ComponentSystem
         public string Name { get; internal set; }
 
         private bool Active;
+
+        private Timer RemoveDeadComponentTask;
 
         /// <summary>
         /// 
@@ -163,6 +166,14 @@ namespace BrainstormProject.Engine.ComponentSystem
                     EngineComponentManager ManagerSubcomponent = RenderableComponents[i] as EngineComponentManager;
                     ManagerSubcomponent.Render(gameTime);
                 }
+            }
+        }
+
+        private void RemoveDeadComponents()
+        {
+            for (int i = 0; i < Components.Count; ++i)
+            {
+                if ( Components[i].)
             }
         }
 

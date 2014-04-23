@@ -5,12 +5,17 @@ using System.Text;
 using System.IO;
 using System.Threading;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Net;
+
 using BrainstormProject.Engine.ComponentSystem;
 using BrainstormProject.Engine.Graphics;
 
 namespace BrainstormProject.Engine
 {
-    public class World : IEngineComponent
+    public class World : IEngineComponent, ILoadable, IUpdatable, IRenderable
     {
         private EngineComponentManager WorldObjects;
 
@@ -19,10 +24,14 @@ namespace BrainstormProject.Engine
         public World()
         {
             Name = "GameWorld";
+
+            WorldObjects = new EngineComponentManager("World_Object_Manager");
         }
         public World(string WorldName)
         {
             Name = WorldName;
+
+            WorldObjects = new EngineComponentManager();
         }
 
         public bool IsComponentManager()
@@ -41,6 +50,21 @@ namespace BrainstormProject.Engine
         public string GetName()
         {
             return Name;
+        }
+
+        public void Load()
+        {
+            WorldObjects.Load();
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            WorldObjects.Update(gameTime);
+        }
+
+        public void Render(GameTime gameTime)
+        {
+            WorldObjects.Render(gameTime);
         }
     }
 }

@@ -32,7 +32,6 @@ namespace BrainstormProject.Engine.Graphics
             Active = false;
             Dead  = false;
         }
-
         public virtual void Load()
         {
         }
@@ -54,7 +53,6 @@ namespace BrainstormProject.Engine.Graphics
         {
             return false;
         }
-
         public void Activate()
         {
             Active = true;
@@ -63,7 +61,6 @@ namespace BrainstormProject.Engine.Graphics
         {
             Active = false;
         }
-
         public string GetName()
         {
             return Name;
