@@ -38,7 +38,8 @@
     <Compile Include="Engine\ComponentSystem\EngineComponentManager.cs" />
     <Compile Include="Engine\ComponentSystem\IEngineComponent.cs" />
     <Compile Include="Engine\Graphics\PointLight.cs" />
-    <Compile Include="Engine\Graphics\WorldObject.cs" />
+    <Compile Include="Engine\World.cs" />
+    <Compile Include="Engine\WorldObject.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

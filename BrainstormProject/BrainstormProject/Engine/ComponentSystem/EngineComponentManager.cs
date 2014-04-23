@@ -122,8 +122,13 @@ namespace BrainstormProject.Engine.ComponentSystem
             for (int i = 0; i < LoadableComponents.Count; ++i)
             {
                 ILoadable CurrentLoadable = LoadableComponents[i] as ILoadable;
-
                 CurrentLoadable.Load();
+                IEngineComponent CurrentCompoent = LoadableComponents[i] as IEngineComponent;
+                if (CurrentCompoent.IsComponentManager())
+                {
+                    EngineComponentManager ManagerSubcomponent = LoadableComponents[i] as EngineComponentManager;
+                    ManagerSubcomponent.Load();
+                }
             }
         }
 
@@ -134,6 +139,13 @@ namespace BrainstormProject.Engine.ComponentSystem
                 IUpdatable CurrentUpdatable = UpdatableComponents[i] as IUpdatable;
 
                 CurrentUpdatable.Update(gameTime);
+
+                IEngineComponent CurrentComponent = UpdatableComponents[i] as IEngineComponent;
+                if (CurrentComponent.IsComponentManager())
+                {
+                    EngineComponentManager ManagerSubcomponent = UpdatableComponents[i] as EngineComponentManager;
+                    ManagerSubcomponent.Update(gameTime);
+                }
             }
         }
 
@@ -144,6 +156,13 @@ namespace BrainstormProject.Engine.ComponentSystem
                 IRenderable CurrentRenderable = RenderableComponents[i] as IRenderable;
 
                 CurrentRenderable.Render(gameTime);
+
+                IEngineComponent CurrentComponent = RenderableComponents[i] as IEngineComponent;
+                if (CurrentComponent.IsComponentManager())
+                {
+                    EngineComponentManager ManagerSubcomponent = RenderableComponents[i] as EngineComponentManager;
+                    ManagerSubcomponent.Render(gameTime);
+                }
             }
         }
 
