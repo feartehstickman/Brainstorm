@@ -35,10 +35,7 @@ namespace BrainstormProject
 
         protected override void LoadContent()
         {
-           
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            rmanager = new EngineResourceManager(this);
 
         }
 

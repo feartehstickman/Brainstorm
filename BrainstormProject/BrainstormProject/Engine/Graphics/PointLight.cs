@@ -83,7 +83,7 @@ namespace BrainstormProject.Engine.Graphics
 
         public string GetName()
         {
-
+            return "PointLight";
         }
     }
 }
