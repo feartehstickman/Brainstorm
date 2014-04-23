@@ -33,7 +33,7 @@ namespace BrainstormProject.Engine.Graphics
             Color = new Vector4();
             Intensity = 0;
             Active = false;
-            Name = "Un-Initiated-Point-Light"
+            Name = "Un-Initiated-Point-Light";
         }
 
         /// <summary>

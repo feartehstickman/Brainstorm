@@ -28,21 +28,45 @@ namespace BrainstormProject.Engine.ComponentSystem
         {
             get
             {
-                return RenderableComponents.Count;
+                int n = 0;
+                for (int i = 0; i < TotalComponents; ++i)
+                {
+                    if (Components[i] is IRenderable)
+                    {
+                        n++;
+                    }
+                }
+                return n;
             }
         }
         public int LoadableComponentCount
         {
             get
             {
-                return LoadableComponents.Count;
+                int n = 0;
+                for (int i = 0; i < TotalComponents; ++i)
+                {
+                    if (Components[i] is ILoadable)
+                    {
+                        n++;
+                    }
+                }
+                return n;
             }
         }
         public int UpdatableComponentCount
         {
             get
             {
-                return UpdatableComponents.Count;
+                int n = 0;
+                for (int i = 0; i < TotalComponents; ++i)
+                {
+                    if (Components[i] is IUpdatable)
+                    {
+                        n++;
+                    }
+                }
+                return n;
             }
         }
         public int TotalActiveComponents
@@ -64,10 +88,9 @@ namespace BrainstormProject.Engine.ComponentSystem
                 TotalActiveComponents = value;
             }
         }
-        public List<IRenderable> RenderableComponents { get; internal set; }
-        public List<IUpdatable> UpdatableComponents { get; internal set; }
+
+        
         public List<IEngineComponent> Components { get; internal set; }
-        public List<ILoadable> LoadableComponents { get; internal set; }
         public string Name { get; internal set; }
 
         private bool Active;
@@ -79,10 +102,9 @@ namespace BrainstormProject.Engine.ComponentSystem
         /// </summary>
         public EngineComponentManager()
         {
-            RenderableComponents = new List<IRenderable>();
-            UpdatableComponents = new List<IUpdatable>();
-            LoadableComponents = new List<ILoadable>();
             Components = new List<IEngineComponent>();
+
+            Active = true;
         }
 
         /// <summary>
@@ -96,98 +118,114 @@ namespace BrainstormProject.Engine.ComponentSystem
                 this.Name = Name;
             }
 
-            RenderableComponents = new List<IRenderable>();
-            UpdatableComponents = new List<IUpdatable>();
-            LoadableComponents = new List<ILoadable>();
             Components = new List<IEngineComponent>();
+
+            Active = true;
         }
 
         public void AddComponent(IEngineComponent Component)
         {
             Components.Add(Component);
-
-            if (Component is ILoadable)
-            {
-                LoadableComponents.Add(Component as ILoadable);
-            }
-            if (Component is IUpdatable)
-            {
-                UpdatableComponents.Add(Component as IUpdatable);
-            }
-            if (Component is IRenderable)
-            {
-                RenderableComponents.Add(Component as IRenderable);
-            }
         }
 
         public void Load()
         {
-            for (int i = 0; i < LoadableComponents.Count; ++i)
+            for (int i = 0; i < TotalComponents; ++i)
             {
-                ILoadable CurrentLoadable = LoadableComponents[i] as ILoadable;
-                CurrentLoadable.Load();
-                IEngineComponent CurrentCompoent = LoadableComponents[i] as IEngineComponent;
-                if (CurrentCompoent.IsComponentManager())
+                if (Components[i] is ILoadable)
                 {
-                    EngineComponentManager ManagerSubcomponent = LoadableComponents[i] as EngineComponentManager;
-                    ManagerSubcomponent.Load();
+                    ILoadable CurrentLoadable = Components[i] as ILoadable;
+
+                    CurrentLoadable.Load();
+
+                    if (Components[i].IsComponentManager())
+                    {
+                        EngineComponentManager Submanager = Components[i] as EngineComponentManager;
+
+                        Submanager.Load();
+                    }
                 }
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            for (int i = 0; i < UpdatableComponents.Count; ++i)
+            for (int i = 0; i < TotalComponents; ++i)
             {
-                IUpdatable CurrentUpdatable = UpdatableComponents[i] as IUpdatable;
-
-                CurrentUpdatable.Update(gameTime);
-
-                IEngineComponent CurrentComponent = UpdatableComponents[i] as IEngineComponent;
-                if (CurrentComponent.IsComponentManager())
+                if (Components[i] is IUpdatable)
                 {
-                    EngineComponentManager ManagerSubcomponent = UpdatableComponents[i] as EngineComponentManager;
-                    ManagerSubcomponent.Update(gameTime);
+                    IUpdatable CurrentUpdatable = Components[i] as IUpdatable;
+
+                    CurrentUpdatable.Update(gameTime);
+
+                    if (Components[i].IsComponentManager())
+                    {
+                        EngineComponentManager Submanager = Components[i] as EngineComponentManager;
+
+                        Submanager.Update(gameTime);
+                    }
                 }
             }
         }
 
         public void Render(GameTime gameTime)
         {
-            for (int i = 0; i < RenderableComponents.Count; ++i)
+            for (int i = 0; i < TotalComponents; ++i)
             {
-                IRenderable CurrentRenderable = RenderableComponents[i] as IRenderable;
-
-                CurrentRenderable.Render(gameTime);
-
-                IEngineComponent CurrentComponent = RenderableComponents[i] as IEngineComponent;
-                if (CurrentComponent.IsComponentManager())
+                if (Components[i] is IRenderable)
                 {
-                    EngineComponentManager ManagerSubcomponent = RenderableComponents[i] as EngineComponentManager;
-                    ManagerSubcomponent.Render(gameTime);
+                    IRenderable CurrentRenderable = Components[i] as IRenderable;
+
+                    CurrentRenderable.Render(gameTime);
+
+                    if (Components[i].IsComponentManager())
+                    {
+                        EngineComponentManager Submanager = Components[i] as EngineComponentManager;
+
+                        Submanager.Render(gameTime);
+                    }
                 }
             }
         }
 
         private void RemoveDeadComponents()
         {
-            for (int i = 0; i < Components.Count; ++i)
+            try
             {
-                if (Components[i].IsDead())
+                if (Components.Count > 0)
                 {
-                    if (Components[i] is ILoadable)
+                    for (int i = 0; i < Components.Count; ++i)
                     {
-                        LoadableComponents.RemoveAt(i);
-                    }
-                    if (Components[i] is IUpdatable)
-                    {
-                        UpdatableComponents.RemoveAt(i);
-                    }
-                    if (Components[i] is IRenderable)
-                    {
-                        RenderableComponents.RemoveAt(i);
+                        if (Components[i].IsDead())
+                        {
+                            Components.RemoveAt(i);
+                            i--;
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                // log this, do something.
+            }
+        }
+
+        public void RemoveComponentByName(string Name)
+        {
+            try
+            {
+                for (int i = 0; i < TotalComponents; ++i)
+                {
+                    if (Components[i].GetName() == Name)
+                    {
+                        Components.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // log this
             }
         }
 
