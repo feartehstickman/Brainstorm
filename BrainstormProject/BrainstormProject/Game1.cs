@@ -18,9 +18,6 @@ namespace BrainstormProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        EngineResourceManager rmanager;
-
-        Texture2D x;
 
         public Game1()
             : base()
