@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using BrainstormProject.Engine.ComponentSystem;
+using BrainstormProject.Engine.Performance;
 
 namespace BrainstormProjectTests.EngineTests.ComponentSystem
 {

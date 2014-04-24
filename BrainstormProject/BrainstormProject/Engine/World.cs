@@ -19,7 +19,23 @@ namespace BrainstormProject.Engine
     {
         private EngineComponentManager WorldObjects;
 
+        public int WorldObjectCount
+        {
+            get
+            {
+                return WorldObjects.TotalComponents;
+            }
+        }
+        public int ActiveWorldObjectCount
+        {
+            get
+            {
+                return WorldObjects.TotalActiveComponents;
+            }
+        }
         public string Name { get; internal set; }
+
+        private bool Active;
 
         public World()
         {
@@ -32,6 +48,8 @@ namespace BrainstormProject.Engine
             Name = WorldName;
 
             WorldObjects = new EngineComponentManager();
+
+            Activate();
         }
 
         public bool IsComponentManager()
@@ -40,7 +58,7 @@ namespace BrainstormProject.Engine
         }
         public bool IsActive()
         {
-            throw new NotImplementedException();
+            return Active;
         }
         public bool IsDead()
         {
@@ -65,6 +83,15 @@ namespace BrainstormProject.Engine
         public void Render(GameTime gameTime)
         {
             WorldObjects.Render(gameTime);
+        }
+
+        public void Activate()
+        {
+            Active = true;
+        }
+        public void Deactivate()
+        {
+            Active = false;
         }
     }
 }
