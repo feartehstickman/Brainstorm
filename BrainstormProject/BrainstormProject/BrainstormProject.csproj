@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{19D4C874-F36A-48CA-A1CD-3E56C1C03432}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BrainstormProject</RootNamespace>
     <AssemblyName>BrainstormProject</AssemblyName>
@@ -34,15 +34,17 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\BrainstormEngine.cs" />
     <Compile Include="Engine\ComponentSystem\EngineComponentManager.cs" />
     <Compile Include="Engine\ComponentSystem\IEngineComponent.cs" />
     <Compile Include="Engine\Graphics\PointLight.cs" />
     <Compile Include="Engine\Performance\PerformanceTimer.cs" />
     <Compile Include="Engine\World.cs" />
     <Compile Include="Engine\WorldObject.cs" />
-    <Compile Include="Game1.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
