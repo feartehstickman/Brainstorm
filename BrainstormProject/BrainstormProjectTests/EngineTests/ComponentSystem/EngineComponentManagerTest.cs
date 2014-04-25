@@ -207,7 +207,22 @@ namespace BrainstormProjectTests.EngineTests.ComponentSystem
             TestRenderable[] renderables = new TestRenderable[NumRenderable];
             TestComponent[] components = new TestComponent[NumComponents];
 
-            Thread.Sleep(100);
+            for (int i = 0; i < NumLoadables; ++i)
+            {
+                loadables[i] = new TestLoadable();
+            }
+            for (int i = 0; i < NumUnloadable; ++i)
+            {
+                unloadables[i] = new TestUnloadable();
+            }
+            for (int i = 0; i < NumUpdatable; ++i)
+            {
+                updatables[i] = new TestUnloadable();
+            }
+            for (int i = 0; i < NumLoadables; ++i)
+            {
+                loadables[i] = new TestLoadable();
+            }
             #endregion
         }
     }
