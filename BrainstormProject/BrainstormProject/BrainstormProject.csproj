@@ -43,6 +43,7 @@
     <Compile Include="Engine\ComponentSystem\IEngineComponent.cs" />
     <Compile Include="Engine\Graphics\PointLight.cs" />
     <Compile Include="Engine\Performance\PerformanceTimer.cs" />
+    <Compile Include="Engine\Resources\EngineFile.cs" />
     <Compile Include="Engine\Resources\EngineFileSerializer.cs" />
     <Compile Include="Engine\World.cs" />
     <Compile Include="Engine\WorldObject.cs" />
