@@ -15,7 +15,7 @@ namespace BrainstormProject.Engine.Resources
         EngineFileAcces_ReadWrite = 2,
     };
 
-    public class EngineFile : IDisposable
+    public sealed class EngineFile : IDisposable
     {
         private FileStream   Stream;
         private BinaryReader BinaryReader;

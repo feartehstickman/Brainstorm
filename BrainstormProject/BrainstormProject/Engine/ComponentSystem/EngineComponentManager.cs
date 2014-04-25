@@ -11,7 +11,7 @@ using MonoGame.Framework;
 
 namespace BrainstormProject.Engine.ComponentSystem
 {
-    public class EngineComponentManager : IEngineComponent, ILoadable, IUpdatable, IRenderable
+    public sealed class EngineComponentManager : IEngineComponent, ILoadable, IUpdatable, IRenderable
     {
         public string ComponentName { get; internal set; }
         public int TotalComponents
@@ -62,6 +62,21 @@ namespace BrainstormProject.Engine.ComponentSystem
                 for (int i = 0; i < TotalComponents; ++i)
                 {
                     if (Components[i] is IUpdatable)
+                    {
+                        n++;
+                    }
+                }
+                return n;
+            }
+        }
+        public int UnloadableComponentCount
+        {
+            get
+            {
+                int n = 0;
+                for (int i = 0; i < TotalComponents; ++i)
+                {
+                    if (Components[i] is IUnloadable)
                     {
                         n++;
                     }
@@ -183,6 +198,25 @@ namespace BrainstormProject.Engine.ComponentSystem
                         EngineComponentManager Submanager = Components[i] as EngineComponentManager;
 
                         Submanager.Render(gameTime);
+                    }
+                }
+            }
+        }
+
+        public void Unload()
+        {
+            for (int i = 0; i < TotalComponents; ++i)
+            {
+                if (Components[i] is IUnloadable)
+                {
+                    IUnloadable CurrentUnloadable = Components[i] as IUnloadable;
+
+                    CurrentUnloadable.Unload();
+
+                    if (Components[i].IsComponentManager())
+                    {
+                        EngineComponentManager Submanager = Components[i] as EngineComponentManager;
+                        Submanager.Unload();
                     }
                 }
             }

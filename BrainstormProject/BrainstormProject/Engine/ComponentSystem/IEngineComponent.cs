@@ -43,4 +43,12 @@ namespace BrainstormProject.Engine.ComponentSystem
     {
         void Load();
     }
+
+    /// <summary>
+    /// Engine component that needs to unload things
+    /// </summary>
+    public interface IUnloadable
+    {
+        void Unload();
+    }
 }

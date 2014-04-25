@@ -33,7 +33,6 @@ namespace BrainstormProject.Engine.Resources
                         object _object = Deserializer.Deserialize(Stream);
 
                         Stream.Close();
-                        Stream.Dispose();
 
                         return _object;
                     }
@@ -57,7 +56,6 @@ namespace BrainstormProject.Engine.Resources
                     Serializer.Serialize(Stream, _object);
 
                     Stream.Close();
-                    Stream.Dispose();
                 }
             }
             catch (Exception e)
