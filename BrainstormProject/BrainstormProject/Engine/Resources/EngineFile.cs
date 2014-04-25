@@ -14,7 +14,7 @@ namespace BrainstormProject.Engine.Resources
     {
         private static object AccessToThis;
 
-        public static EngineFileSerializer()
+        static EngineFileSerializer()
         {
             AccessToThis = new object();
         }
