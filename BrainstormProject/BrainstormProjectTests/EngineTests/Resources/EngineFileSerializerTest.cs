@@ -17,7 +17,7 @@ namespace BrainstormProjectTests.EngineTests.Resources
     public class EngineFileSerializerTest
     {
         [TestMethod]
-        public void Test()
+        public void EngineFileSerializer_Test()
         {
             DataClass d1 = new DataClass();
 

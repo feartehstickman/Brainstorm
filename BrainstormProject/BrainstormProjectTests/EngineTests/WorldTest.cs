@@ -10,7 +10,7 @@ namespace BrainstormProjectTests.EngineTests
     public class WorldTest
     {
         [TestMethod]
-        public void Test()
+        public void World_Test()
         {
             World TestWorld = new World("TestWorld");
 

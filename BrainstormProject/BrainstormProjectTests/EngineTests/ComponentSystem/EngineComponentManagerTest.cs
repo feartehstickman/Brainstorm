@@ -6,8 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 using BrainstormProject.Engine.ComponentSystem;
 using BrainstormProject.Engine.Performance;
 
+using System.Threading;
+
 namespace BrainstormProjectTests.EngineTests.ComponentSystem
 {
+    #region Test Classed
     public class TestLoadable : ILoadable, IEngineComponent
     {
         public TestLoadable()
@@ -142,78 +145,69 @@ namespace BrainstormProjectTests.EngineTests.ComponentSystem
             return "TestComponent";
         }
     }
+    public class TestUnloadable : IUnloadable,IEngineComponent
+    {
+        public TestUnloadable()
+        {
+            
+        }
+
+        public bool IsComponentManager()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsActive()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsDead()
+        {
+            return false;
+        }
+
+        public void Deactivate()
+        {
+            
+        }
+
+        public string GetName()
+        {
+            return "TestComponent";
+        }
+
+        public void Unload()
+        {
+
+        }
+    }
+    #endregion
 
     [TestClass]
     public class EngineComponentManagerTest
     {
         [TestMethod]
-        public void Test()
+        public void EngineComponentManager_Test()
         {
             #region Setup
             EngineComponentManager TestComponentManager = new EngineComponentManager("UnitTestManager");
+            Random r = new Random();
 
-            TestLoadable Loadable     = new TestLoadable();
-            TestUpdatable Updatable   = new TestUpdatable();
-            TestRenderable Renderable = new TestRenderable();
-            TestComponent Component   = new TestComponent();
-            #endregion
+            int MaxTestLoad   = 100;
+            int NumLoadables  = r.Next(MaxTestLoad);
+            int NumComponents = r.Next(MaxTestLoad);
+            int NumUpdatable = r.Next(MaxTestLoad);
+            int NumRenderable = r.Next(MaxTestLoad);
+            int NumUnloadable = r.Next(MaxTestLoad);
 
-            #region Component Addition Tests
-            TestComponentManager.AddComponent(Component);
-            Assert.IsTrue((TestComponentManager.TotalComponents          == 1));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount  == 0));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount   == 0));
+            TestLoadable[] loadables = new TestLoadable[NumLoadables];
+            TestUnloadable[] unloadables = new TestUnloadable[NumUnloadable];
+            TestUnloadable[] updatables = new TestUnloadable[NumUpdatable];
+            TestRenderable[] renderables = new TestRenderable[NumRenderable];
+            TestComponent[] components = new TestComponent[NumComponents];
 
-            TestComponentManager.AddComponent(Loadable);
-            Assert.IsTrue((TestComponentManager.TotalComponents          == 2));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount  == 0));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount   == 1));
-
-            TestComponentManager.AddComponent(Updatable);
-            Assert.IsTrue((TestComponentManager.TotalComponents          == 3));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount  == 1));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount   == 1));
-
-            TestComponentManager.AddComponent(Renderable);
-            Assert.IsTrue((TestComponentManager.TotalComponents          == 4));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount  == 1));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 1));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount   == 1));
-            #endregion
-
-            #region Component Removal Tests
-            TestComponentManager.RemoveComponentByName("TestLoadable");
-            Assert.IsTrue((TestComponentManager.TotalComponents == 3));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount == 1));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 1));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount == 0));
-
-            TestComponentManager.RemoveComponentByName("TestUpdatable");
-            Assert.IsTrue((TestComponentManager.TotalComponents == 2));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 1));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount == 0));
-
-            TestComponentManager.RemoveComponentByName("TestRenderable");
-            Assert.IsTrue((TestComponentManager.TotalComponents == 1));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount == 0));
-
-            TestComponentManager.RemoveComponentByName("TestComponent");
-            Assert.IsTrue((TestComponentManager.TotalComponents == 0));
-            Assert.IsTrue((TestComponentManager.UpdatableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.RenderableComponentCount == 0));
-            Assert.IsTrue((TestComponentManager.LoadableComponentCount == 0));
-            #endregion
-            
-            #region Baseline Tests
-            Assert.IsTrue(TestComponentManager.IsComponentManager());
-            Assert.IsTrue(TestComponentManager.Name != string.Empty);
-            Assert.IsTrue(TestComponentManager.IsActive());
+            Thread.Sleep(100);
             #endregion
         }
     }
