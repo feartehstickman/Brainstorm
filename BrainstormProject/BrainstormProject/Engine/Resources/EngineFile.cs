@@ -31,8 +31,11 @@ namespace BrainstormProject.Engine.Resources
                         XmlSerializer Deserializer = new XmlSerializer(typeof(T));
 
                         object _object = Deserializer.Deserialize(Stream);
-                        
-                        return (_object != null) ? _object : new Exception("FAILED");
+
+                        Stream.Close();
+                        Stream.Dispose();
+
+                        return _object;
                     }
                 }
             }
@@ -41,6 +44,22 @@ namespace BrainstormProject.Engine.Resources
                 return e;
             }
             return new Exception("welp");
+        }
+
+        public static void Serialize<T>(string FilePath,T _object)
+        {
+            try
+            {
+                lock (AccessToThis)
+                {
+                        FileStream Stream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite);
+                        XmlSerializer Serializer = new XmlSerializer(typeof(T));
+                        Serializer.Serialize(Stream, _object);
+                }
+            }
+            catch (Exception e)
+            {
+            }
         }
     }
 }
