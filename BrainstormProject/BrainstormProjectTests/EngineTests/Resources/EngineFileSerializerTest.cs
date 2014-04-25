@@ -14,7 +14,7 @@ namespace BrainstormProjectTests.EngineTests.Resources
     }
 
     [TestClass]
-    public class EngineFileTest
+    public class EngineFileSerializerTest
     {
         [TestMethod]
         public void Test()

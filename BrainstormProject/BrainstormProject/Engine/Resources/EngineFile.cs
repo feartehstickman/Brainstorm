@@ -8,6 +8,13 @@ using System.Threading;
 
 namespace BrainstormProject.Engine.Resources
 {
+    public enum EngineFileAccess
+    {
+        EngineFileAcces_Read = 0,
+        EngineFileAcces_Write = 1,
+        EngineFileAcces_ReadWrite = 2,
+    };
+
     public class EngineFile : IDisposable
     {
         private FileStream   Stream;
@@ -33,9 +40,9 @@ namespace BrainstormProject.Engine.Resources
             }
         }
 
-        public void OpenFile(string FilePath)
+        public void OpenFile(string FilePath, EngineFileAccess FileAccesRequired)
         {
-            throw new NotImplementedException();
+
         }
 
         public void Dispose()
@@ -62,6 +69,10 @@ namespace BrainstormProject.Engine.Resources
                     TextReader.Close();
                     TextReader.Dispose();
                 }
+            }
+            catch (Exception e)
+            {
+
             }
         }
     }

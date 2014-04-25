@@ -54,7 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EngineTests\ComponentSystem\EngineComponentManagerTest.cs" />
-    <Compile Include="EngineTests\Resources\EngineFileTest.cs" />
+    <Compile Include="EngineTests\Resources\EngineFileSerializerTest.cs" />
     <Compile Include="EngineTests\WorldTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
