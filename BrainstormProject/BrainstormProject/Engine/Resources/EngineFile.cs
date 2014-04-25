@@ -52,9 +52,12 @@ namespace BrainstormProject.Engine.Resources
             {
                 lock (AccessToThis)
                 {
-                        FileStream Stream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite);
-                        XmlSerializer Serializer = new XmlSerializer(typeof(T));
-                        Serializer.Serialize(Stream, _object);
+                    FileStream Stream = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite);
+                    XmlSerializer Serializer = new XmlSerializer(typeof(T));
+                    Serializer.Serialize(Stream, _object);
+
+                    Stream.Close();
+                    Stream.Dispose();
                 }
             }
             catch (Exception e)
