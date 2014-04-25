@@ -43,6 +43,7 @@
     <Compile Include="Engine\ComponentSystem\IEngineComponent.cs" />
     <Compile Include="Engine\Graphics\PointLight.cs" />
     <Compile Include="Engine\Performance\PerformanceTimer.cs" />
+    <Compile Include="Engine\Resources\EngineFile.cs" />
     <Compile Include="Engine\World.cs" />
     <Compile Include="Engine\WorldObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
-    <Folder Include="Engine\Resources\" />
     <Folder Include="Engine\Threading\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

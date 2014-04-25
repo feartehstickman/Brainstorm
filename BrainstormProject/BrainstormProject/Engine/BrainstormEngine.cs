@@ -22,8 +22,37 @@ namespace BrainstormProject.Engine
 
         public string ApplicationName { get; internal set; }
 
-        public BrainstormEngine()
+        public Viewport GameViewport
         {
+            get
+            {
+                return GraphicsDevice.Viewport;
+            }
+        }
+
+        public BrainstormEngine(string Name)
+        {
+            ApplicationName = Name;
+
+            GraphicsManager = new GraphicsDeviceManager(this);
+
+            GraphicsManager.PreferredBackBufferWidth  = 800;
+            GraphicsManager.PreferredBackBufferHeight = 600;
+            GraphicsManager.PreferredBackBufferFormat = SurfaceFormat.Color;
+            GraphicsManager.PreferMultiSampling = false;
+            GraphicsManager.IsFullScreen = false;
+        }
+        public BrainstormEngine(string Name,int Width,int Height, bool Fullscreen)
+        {
+            ApplicationName = Name;
+
+            GraphicsManager = new GraphicsDeviceManager(this);
+
+            GraphicsManager.PreferredBackBufferWidth  = Width;
+            GraphicsManager.PreferredBackBufferHeight = Height;
+            GraphicsManager.PreferredBackBufferFormat = SurfaceFormat.Color;
+            GraphicsManager.PreferMultiSampling       = false;
+            GraphicsManager.IsFullScreen              = Fullscreen;
         }
 
         protected override void Initialize()
