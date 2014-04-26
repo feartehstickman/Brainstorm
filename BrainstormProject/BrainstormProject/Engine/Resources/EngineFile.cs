@@ -20,8 +20,8 @@ namespace BrainstormProject.Engine.Resources
         private FileStream   Stream;
         private BinaryReader BinaryReader;
         private BinaryWriter BinaryWriter;
-        private TextReader   TextReader;
-        private TextWriter   TextWriter;
+        private TextReader   Reader;
+        private TextWriter   Writer;
 
         public bool FileOpen { get; internal set; }
         public long FileSize { get; internal set; }
@@ -42,7 +42,33 @@ namespace BrainstormProject.Engine.Resources
 
         public void OpenFile(string FilePath, EngineFileAccess FileAccesRequired)
         {
+            if (!FileOpen)
+            {
+                switch (FileAccesRequired)
+                {
+                    case EngineFileAccess.EngineFileAcces_Read:
+                        {
+                            Stream = File.Open(FilePath, FileMode.Open, FileAccess.Read);
+                            break;
+                        };
+                    case EngineFileAccess.EngineFileAcces_Write:
+                        {
+                            Stream = File.Open(FilePath, FileMode.Open, FileAccess.Write);
+                            break;
+                        };
+                    case EngineFileAccess.EngineFileAcces_ReadWrite:
+                        {
+                            Stream = File.Open(FilePath, FileMode.Open, FileAccess.ReadWrite);
+                            break;
+                        };
+                }
 
+                BinaryReader = new BinaryReader(Stream);
+                BinaryWriter = new BinaryWriter(Stream);
+
+                FileOpen = true;
+                CalculateFileSize();
+            }
         }
 
         public void Dispose()
@@ -63,11 +89,6 @@ namespace BrainstormProject.Engine.Resources
                 {
                     BinaryWriter.Close();
                     BinaryWriter.Dispose();
-                }
-                if (TextReader != null)
-                {
-                    TextReader.Close();
-                    TextReader.Dispose();
                 }
             }
             catch (Exception e)
