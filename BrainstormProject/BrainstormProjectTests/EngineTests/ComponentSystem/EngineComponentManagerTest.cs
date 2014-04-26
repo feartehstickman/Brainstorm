@@ -210,20 +210,37 @@ namespace BrainstormProjectTests.EngineTests.ComponentSystem
             for (int i = 0; i < NumLoadables; ++i)
             {
                 loadables[i] = new TestLoadable();
+                TestComponentManager.AddComponent(loadables[i]);
             }
             for (int i = 0; i < NumUnloadable; ++i)
             {
                 unloadables[i] = new TestUnloadable();
+                TestComponentManager.AddComponent(unloadables[i]);
             }
             for (int i = 0; i < NumUpdatable; ++i)
             {
                 updatables[i] = new TestUnloadable();
+                TestComponentManager.AddComponent(updatables[i]);
             }
-            for (int i = 0; i < NumLoadables; ++i)
+            for (int i = 0; i < NumRenderable; ++i)
             {
-                loadables[i] = new TestLoadable();
+                renderables[i] = new TestRenderable();
+                TestComponentManager.AddComponent(renderables[i]);
+            }
+            for (int i = 0; i < NumComponents; ++i)
+            {
+                components[i] = new TestComponent();
+                TestComponentManager.AddComponent(components[i]);
             }
             #endregion
+
+            int TotalExpectedComponentCount = (NumComponents + NumLoadables + NumRenderable + NumUnloadable + NumUpdatable);
+
+            Assert.IsTrue(TestComponentManager.TotalComponents          == TotalExpectedComponentCount);
+            Assert.IsTrue(TestComponentManager.UnloadableComponentCount == NumUnloadable);
+            Assert.IsTrue(TestComponentManager.UpdatableComponentCount  == NumUpdatable);
+            Assert.IsTrue(TestComponentManager.RenderableComponentCount == NumRenderable);
+            Assert.IsTrue(TestComponentManager.UnloadableComponentCount == NumUnloadable);
         }
     }
 }
