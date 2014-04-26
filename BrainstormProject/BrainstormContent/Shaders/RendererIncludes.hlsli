@@ -18,7 +18,6 @@ PointLight2D EngineLights[NUM_SUPPORTED_LIGHTS];
 
 void ResetLighting()
 {
-	[UNROLL]
 	for ( int i = 0; i < NUM_SUPPORTED_LIGHTS; ++i )
 	{
 		EngineLights[i].Position = half2(0,0);
