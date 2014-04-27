@@ -74,6 +74,11 @@ namespace BrainstormProject.Engine
         {
             WorldObjects.Load();
         }
+        
+        public void LoadWorldFromFile(string FilePath)
+        {
+            throw new NonImplementedException();
+        }
 
         public void Update(GameTime gameTime)
         {

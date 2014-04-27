@@ -18,10 +18,34 @@ namespace BrainstormProject.Engine.Resources
     public sealed class EngineFile : IDisposable
     {
         private FileStream   Stream;
-        private BinaryReader BinaryReader;
-        private BinaryWriter BinaryWriter;
-        private TextReader   Reader;
-        private TextWriter   Writer;
+        public BinaryWriter Writer
+        {
+            get
+            {
+                if (FileOpen)
+                {
+                    return Writer;
+                }
+            }
+            internal set
+            {
+                Writer = value;
+            }
+        }
+        public BinaryReader Reader
+        {
+            get
+            {
+                if(FileOpen)
+                {
+                    return Reader;
+                }
+            }
+            internal set
+            {
+                Reader = value;
+            }
+        }
 
         public bool FileOpen { get; internal set; }
         public long FileSize { get; internal set; }
@@ -29,7 +53,7 @@ namespace BrainstormProject.Engine.Resources
         public EngineFile()
         {
         }
-
+    
         private void CalculateFileSize()
         {
             if (FileOpen)
