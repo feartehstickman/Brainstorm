@@ -21,12 +21,27 @@ namespace BrainstormProject.Engine
         private GraphicsDeviceManager GraphicsManager;
 
         public string ApplicationName { get; internal set; }
+        
+        private List<World> Worlds;
+        private World ActiveWorld;
 
         public Viewport GameViewport
         {
             get
             {
                 return GraphicsDevice.Viewport;
+            }
+        }
+        
+        public int WorldCount
+        {
+            get
+            {
+                return Worlds.Count;
+            }
+            internal set
+            {
+                WorldCount = value;
             }
         }
 
@@ -41,6 +56,8 @@ namespace BrainstormProject.Engine
             GraphicsManager.PreferredBackBufferFormat = SurfaceFormat.Color;
             GraphicsManager.PreferMultiSampling = false;
             GraphicsManager.IsFullScreen = false;
+            
+            Worlds = new List<World>();
         }
         public BrainstormEngine(string Name,int Width,int Height, bool Fullscreen)
         {
@@ -53,6 +70,21 @@ namespace BrainstormProject.Engine
             GraphicsManager.PreferredBackBufferFormat = SurfaceFormat.Color;
             GraphicsManager.PreferMultiSampling       = false;
             GraphicsManager.IsFullScreen              = Fullscreen;
+            
+            Worlds = new List<World>();
+        }
+        
+        public void AddWorld(World world)
+        {
+            Worlds.Add (world);
+        }
+        
+        public void SetWorld ( int Index)
+        {
+            if ( Worlds.Count >= Index)
+            {
+                ActiveWorld = Worlds[Index];
+            }
         }
 
         protected override void Initialize()
