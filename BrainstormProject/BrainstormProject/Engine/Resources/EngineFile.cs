@@ -20,27 +20,13 @@ namespace BrainstormProject.Engine.Resources
         private FileStream   Stream;
         public BinaryWriter Writer
         {
-            get
-            {
-                if (FileOpen)
-                {
-                    return Writer;
-                }
-            }
-            internal set
-            {
-                Writer = value;
-            }
+            get;
         }
+
         public BinaryReader Reader
         {
-            get
-            {
-                if(FileOpen)
-                {
-                    return Reader;
-                }
-            }
+            get;
+
             internal set
             {
                 Reader = value;
@@ -87,8 +73,8 @@ namespace BrainstormProject.Engine.Resources
                         };
                 }
 
-                BinaryReader = new BinaryReader(Stream);
-                BinaryWriter = new BinaryWriter(Stream);
+                Reader = new BinaryReader(Stream);
+                Writer = new BinaryWriter(Stream);
 
                 FileOpen = true;
                 CalculateFileSize();
@@ -104,15 +90,15 @@ namespace BrainstormProject.Engine.Resources
                     Stream.Close();
                     Stream.Dispose();
                 }
-                if (BinaryReader != null)
+                if (Reader != null)
                 {
-                    BinaryReader.Close();
-                    BinaryReader.Dispose();
+                    Reader.Close();
+                    Reader.Dispose();
                 }
-                if (BinaryWriter != null)
+                if (Writer != null)
                 {
-                    BinaryWriter.Close();
-                    BinaryWriter.Dispose();
+                    Writer.Close();
+                    Writer.Dispose();
                 }
             }
             catch (Exception e)

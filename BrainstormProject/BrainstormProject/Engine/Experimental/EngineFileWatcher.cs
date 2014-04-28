@@ -31,9 +31,32 @@ namespace BrainstormProject.Engine.Experimental
             CachedLastAccess = File.GetLastWriteTimeUtc(FilePath);
         }
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
     public class EngineFileWatcher
     {
         private Timer FileWatchTask;
+
+        private List<FileWatchData> Watchlist;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EngineFileWatcher()
+        {
+            Watchlist = new List<FileWatchData>();
+
+
+        }
+
+        private void WatchFiles()
+        {
+            if ( Watchlist.Count > 0)
+            {
+
+            }
+        }
     }
 }
