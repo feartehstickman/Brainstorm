@@ -17,6 +17,7 @@ namespace BrainstormProject.Engine.Graphics
 {
     public class WorldObject : ILoadable, IUpdatable, IRenderable, IEngineComponent
     {
+        //ADD
         private bool Active;
 
         private bool Dead;
